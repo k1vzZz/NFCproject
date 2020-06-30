@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">NFCproject</string>
+
+    <string name="registration_title">Please complete registration to use application</string>
+
+    <string name="enter_pin_title">Enter the received PIN from your mail we sent to you</string>
+    <string name="pin_code">pin code</string>
+    <string name="phone_number">Phone number</string>
+    <string name="submit">Submit</string>
+    <string name="phone_error">Invalid phone number format</string>
+    <string name="password">Password</string>
 </resources>

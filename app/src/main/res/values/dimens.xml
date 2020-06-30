@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="status_bar_height">24dp</dimen>
+
+    <dimen name="view_pager_margin">20dp</dimen>
+    <dimen name="view_pager_offset">40dp</dimen>
+
+    <dimen name="elevation">14dp</dimen>
+</resources>

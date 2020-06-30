@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    tools:context=".ui.pin.PinFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/waves"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/enterPinTitle"
+        style="@style/RegistrationText"
+        android:layout_marginTop="32dp"
+        android:text="@string/enter_pin_title"
+        android:textColor="@color/registration_black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <EditText
+        android:id="@+id/pinInputEditText"
+        style="@style/EmailEditText"
+        android:layout_marginTop="46dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterPinTitle"
+        android:autofillHints="@string/pin_code" />
+
+    <TextView
+        android:id="@+id/pinEditTitle"
+        style="@style/RegTitle"
+        android:text="@string/pin_code"
+        app:layout_constraintBottom_toTopOf="@+id/pinInputEditText"
+        app:layout_constraintEnd_toEndOf="@+id/pinInputEditText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/pinInputEditText"
+        app:layout_constraintTop_toTopOf="@+id/pinInputEditText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/pinErrorText"
+        style="@style/RegistrationText"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/registration_error_color"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinInputEditText" />
+
+    <View
+        android:id="@+id/pinNoErrorsOffsetView"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/pinErrorText" />
+
+    <Button
+        android:id="@+id/submitPinBtn"
+        style="@style/SubmitButton"
+        android:layout_marginTop="16dp"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinNoErrorsOffsetView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

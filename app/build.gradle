@@ -1,35 +1,106 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 1
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId "com.developer.nfcproject"
-        minSdkVersion 24
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        def buildNumber = buildNumber()
+        versionCode versionMajor * 10000000 + versionMinor * 100000 + versionPatch * 1000 + buildNumber
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}.${buildNumber}"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental": "true"]
+            }
+        }
     }
     buildTypes {
+        debug {
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions 'version'
+    productFlavors {
+        beta {
+            dimension = 'version'
+            applicationIdSuffix = '.beta'
+            buildConfigField 'boolean', 'BETA', 'true'
+        }
+        full {
+            dimension = 'version'
+            buildConfigField 'boolean', 'BETA', 'false'
+        }
+    }
+    sourceSets {
+        beta {
+            res {
+                srcDirs 'src/beta/res', 'src/beta/res/'
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:28.0.0'
-    implementation "com.android.support:support-core-utils:28.0.0"
-    implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.google.firebase:firebase-auth:16.2.1'
-    implementation 'com.googlecode.libphonenumber:libphonenumber:8.9.7'
-    testImplementation 'junit:junit:4.12'
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation 'com.google.firebase:firebase-core:17.4.3'
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.5'
+
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.viewpager2:viewpager2:$viewpagerVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion"
+
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+def buildNumber() {
+    def buildNumber = 999
+    if (project.hasProperty('buildNumber')) {
+        buildNumber = project.property('buildNumber') as Integer
+    }
+    return buildNumber
+}
+
+task printVersionName {
+    doLast {
+        println "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
 }
 apply plugin: 'com.google.gms.google-services'

@@ -11,8 +11,6 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 import android.os.Parcelable;
-import android.support.design.card.MaterialCardView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +19,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -106,9 +108,6 @@ public class CardDetails extends AppCompatActivity {
         writeTagFilters = new IntentFilter[] { tagDetected };
     }
 
-    /******************************************************************************
-     **********************************Read From NFC Tag***************************
-     ******************************************************************************/
     private void readFromIntent(Intent intent) {
         String action = intent.getAction();
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
@@ -146,10 +145,6 @@ public class CardDetails extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-
-    /******************************************************************************
-     **********************************Write to NFC Tag****************************
-     ******************************************************************************/
     private void write(String text, Tag tag) throws IOException, FormatException {
         NdefRecord[] records = { createRecord(text) };
         NdefMessage message = new NdefMessage(records);
@@ -186,9 +181,10 @@ public class CardDetails extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         setIntent(intent);
         readFromIntent(intent);
-        if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())){
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             myTag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         }
     }
@@ -205,18 +201,11 @@ public class CardDetails extends AppCompatActivity {
         WriteModeOn();
     }
 
-
-
-    /******************************************************************************
-     **********************************Enable Write********************************
-     ******************************************************************************/
     private void WriteModeOn(){
         writeMode = true;
         nfcAdapter.enableForegroundDispatch(this, pendingIntent, writeTagFilters, null);
     }
-    /******************************************************************************
-     **********************************Disable Write*******************************
-     ******************************************************************************/
+
     private void WriteModeOff(){
         writeMode = false;
         nfcAdapter.disableForegroundDispatch(this);
