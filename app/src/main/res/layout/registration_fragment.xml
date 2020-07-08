@@ -47,29 +47,6 @@
         app:layout_constraintTop_toTopOf="@+id/editTextPhone"
         app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        style="@style/EmailEditText"
-        android:id="@+id/editTextPassword"
-        android:layout_marginTop="18dp"
-        android:inputType="textPassword"
-        android:autofillHints="Password"
-        android:hint="@string/password"
-        android:maxLength="10"
-        app:layout_constraintTop_toBottomOf="@id/editTextPhone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <TextView
-        android:id="@+id/passwordEditTitle"
-        style="@style/RegTitle"
-        android:text="@string/password"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        app:layout_constraintTop_toTopOf="@+id/editTextPassword"
-        app:layout_constraintVertical_bias="1.0" />
-
     <TextView
         android:id="@+id/errorText"
         style="@style/RegistrationText"
@@ -80,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
 
     <View
         android:id="@+id/noErrorOffsetView"

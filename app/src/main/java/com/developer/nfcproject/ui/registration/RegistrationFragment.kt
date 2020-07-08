@@ -28,9 +28,11 @@ class RegistrationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.registration_fragment, container, false).apply {
 
-//        if (!BuildConfig.BETA) {
-//            findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToOperationsFragment())
-//        }
+        viewModel.userId.observe(viewLifecycleOwner) {
+            if (it > 0L){
+                findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToUserPinFragment())
+            }
+        }
         buttonRegistration.setOnClickListener {
             findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToOperationsFragment())
         }

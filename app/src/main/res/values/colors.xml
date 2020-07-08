@@ -13,7 +13,7 @@
     <color name="welcome_logo_grey_color">#B0B0B0</color>
     <color name="welcome_logo_blue_color">#7DD8FF</color>
 
-    <color name="welcome_background_default_color">#6A6A6A</color>
+    <color name="welcome_background_default_color">@android:color/white</color>
     <color name="welcome_background_qsr_color">#009FE3</color>
     <color name="welcome_card_background_default_color">#878787</color>
     <color name="welcome_card_background_qsr_color">#35C0FB</color>

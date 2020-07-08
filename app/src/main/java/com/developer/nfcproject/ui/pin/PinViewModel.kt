@@ -3,11 +3,15 @@ package com.developer.nfcproject.ui.pin
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.developer.nfcproject.utils.AppPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 
-class PinViewModel(application: Application) : AndroidViewModel(application) {
+class PinViewModel(
+    application: Application,
+    private val appPreferences: AppPreferences
+) : AndroidViewModel(application) {
 
     private val auth = FirebaseAuth.getInstance().also {
         it.useAppLanguage()
@@ -29,6 +33,7 @@ class PinViewModel(application: Application) : AndroidViewModel(application) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+                    appPreferences.setPhoneNumber(phone!!)
                     goToWelcome.value = true
                 } else {
                     isGeneralError.value = "Invalid pin code"

@@ -33,6 +33,17 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
+        <action
+            android:id="@+id/action_registrationFragment_to_userPinFragment"
+            app:destination="@id/userPinFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
     </fragment>
 
     <fragment
@@ -49,8 +60,8 @@
             app:nullable="false"
             app:argType="string"/>
         <action
-            android:id="@+id/action_pinFragment_to_operationsFragment"
-            app:destination="@id/operationsFragment"
+            android:id="@+id/action_pinFragment_to_userPinFragment"
+            app:destination="@id/userPinFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true"
@@ -79,5 +90,22 @@
         android:name="com.developer.nfcproject.ui.settings.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment"/>
+
+    <fragment
+        android:id="@+id/userPinFragment"
+        android:name="com.developer.nfcproject.ui.userpin.UserPinFragment"
+        android:label="user_pin_fragment"
+        tools:layout="@layout/user_pin_code_fragment">
+        <action
+            android:id="@+id/action_userPinFragment_to_operationsFragment"
+            app:destination="@id/operationsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
 </navigation>

@@ -3,7 +3,10 @@ package com.developer.nfcproject.ui.registration
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.developer.nfcproject.services.RegistrationService
+import com.developer.nfcproject.utils.AppPreferences
 import com.google.android.gms.tasks.TaskExecutors
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -13,8 +16,14 @@ import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
 import java.util.concurrent.TimeUnit
 
-class RegistrationViewModel(application: Application) : AndroidViewModel(application) {
+class RegistrationViewModel(
+    application: Application,
+    private val registrationService: RegistrationService,
+    private val appPreferences: AppPreferences
+) : AndroidViewModel(application) {
     private val TAG = "RegistrationViewModel"
+
+    val userId: LiveData<Long> = appPreferences.userId
 
     var verificationId: String? = null
     private var token: ForceResendingToken? = null

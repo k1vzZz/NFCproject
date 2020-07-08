@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.mode_view_holder.view.*
 
 class ModeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(item: Mode) = with(itemView) {
-        titleTextView.setText(item.titleRes)
+        //titleTextView.setText(item.titleRes)
         logoImageView.setImageResource(item.logoRes)
     }
 

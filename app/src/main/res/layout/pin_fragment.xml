@@ -29,7 +29,7 @@
         android:id="@+id/pinInputEditText"
         style="@style/EmailEditText"
         android:layout_marginTop="46dp"
-        android:inputType="textEmailAddress"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterPinTitle"

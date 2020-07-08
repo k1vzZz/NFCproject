@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        style="@style/RegistrationText"
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="25 may"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:id="@+id/imageTransport"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/cardbackground_sky"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toEndOf="@+id/imageTransport"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="15dp">
+
+            <TextView
+                style="@style/RegistrationText"
+                android:id="@+id/numberTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:text="Transport  N34"/>
+
+            <TextView
+                style="@style/RegistrationText"
+                android:id="@+id/typeTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bus"/>
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/RegistrationText"
+            android:id="@+id/operation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"
+            android:text="-1 route"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

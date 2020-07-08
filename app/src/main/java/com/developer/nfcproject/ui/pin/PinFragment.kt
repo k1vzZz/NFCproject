@@ -38,7 +38,7 @@ class PinFragment : Fragment() {
         viewModel.goToWelcome.observe(viewLifecycleOwner) {
             // move welcome
             if (it) {
-                findNavController().navigate(PinFragmentDirections.actionPinFragmentToOperationsFragment())
+                findNavController().navigate(PinFragmentDirections.actionPinFragmentToUserPinFragment())
             }
         }
 

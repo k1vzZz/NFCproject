@@ -1,4 +1,4 @@
-package com.developer.nfcproject.ui.registration
+package com.developer.nfcproject.ui.userpin
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -8,16 +8,16 @@ import com.developer.nfcproject.utils.AppPreferences
 import java.lang.Exception
 import java.lang.RuntimeException
 
-class RegistrationViewModelFactory(
+class UserPinViewModelFactory(
     private val application: Application,
-    private val registrationService: RegistrationService,
-    private val appPreferences: AppPreferences
+    private val appPreferences: AppPreferences,
+    private val registrationService: RegistrationService
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return try {
             @Suppress("UNCHECKED_CAST")
-            RegistrationViewModel(application, registrationService, appPreferences) as T
+            UserPinViewModel(application, registrationService, appPreferences) as T
         } catch (e: Exception) {
             throw RuntimeException(e)
         }

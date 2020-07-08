@@ -5,14 +5,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.developer.nfcproject.BaseViewModel
 import com.developer.nfcproject.R
+import com.developer.nfcproject.utils.InjectorUtils
 import kotlinx.android.synthetic.main.operations_fragment.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.abs
 
 class OperationsFragment : Fragment() {
+
+    private val viewModel: OperationsViewModel by viewModels {
+        InjectorUtils.provideOperationsModelFactory(requireActivity())
+    }
 
     private lateinit var modeAdapter: ModeAdapter
     private var selectedPosition: Int = 0
@@ -54,6 +67,37 @@ class OperationsFragment : Fragment() {
             clipToPadding = false
             clipChildren = false
             offscreenPageLimit = 1
+        }
+
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = layoutManager
+        val operationsItemAdapter = OperationsAdapter {
+            val dateFormat = SimpleDateFormat("dd MMMM HH:mm:ss", Locale.getDefault())
+            val date = dateFormat.format(Date(it.operationDate))
+            Toast.makeText(
+                requireContext(),
+                String.format("Transport #%d\n%s", it.transportNumber, date),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        recyclerView.adapter = operationsItemAdapter
+
+        settingsBtn.setOnClickListener {
+            operationsItemAdapter.submitList(viewModel.items)
+        }
+
+        activity?.let {
+            val baseViewModel = ViewModelProvider(it).get(BaseViewModel::class.java)
+            baseViewModel.nfcIntent.observe(viewLifecycleOwner) { nfcModel ->
+                Toast.makeText(it, String.format("TransportNumber #%s", nfcModel.messages?.transportNumber), Toast.LENGTH_LONG).show()
+                viewModel.processPay(nfcModel)
+            }
+        }
+
+        viewModel.isSuccessPay.observe(viewLifecycleOwner) {
+            if (it) {
+                //Toast.makeText(context, String.format("Success"), Toast.LENGTH_LONG).show()
+            }
         }
 
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.view_pager_margin)

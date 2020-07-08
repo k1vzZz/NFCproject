@@ -1,23 +1,21 @@
-package com.developer.nfcproject.ui.registration
+package com.developer.nfcproject.ui.operations
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.developer.nfcproject.services.RegistrationService
-import com.developer.nfcproject.utils.AppPreferences
+import com.developer.nfcproject.services.OperationsService
 import java.lang.Exception
 import java.lang.RuntimeException
 
-class RegistrationViewModelFactory(
+class OperationsViewModelFactory(
     private val application: Application,
-    private val registrationService: RegistrationService,
-    private val appPreferences: AppPreferences
+    private val operationsService: OperationsService
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return try {
             @Suppress("UNCHECKED_CAST")
-            RegistrationViewModel(application, registrationService, appPreferences) as T
+            OperationsViewModel(application, operationsService) as T
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
